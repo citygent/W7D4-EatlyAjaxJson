@@ -28,8 +28,14 @@ function addToPage(thing, element) {
 function destroyItem() {
   item = $(this);
   itemId = item.data('id');
-  console.log(itemId);
   item.parent().remove()
+  console.log(itemId);
+  $.ajax({url:'//localhost:3000/foods/'+itemId,
+          type: "DELETE", 
+          success: function(response) {
+          console.log(response);
+                  }
+        })
 }
 
 
