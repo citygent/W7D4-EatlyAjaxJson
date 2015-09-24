@@ -8,19 +8,29 @@ $(document).ready(function() {
     render(response);
   })
 
-
+  $('.foods ul').on('click', '.destroy', destroyItem);
 
 function render(response) {
   var data = response;
   // console.log(data);
   $.each(data, function(index, value) {
     // console.log(value.name);
-    var foodItem = '<li data-id="'+value.id+'">Name: '+value.name+', Yumminess: '+value.yumminess+'</li>';
-    console.log(foodItem);
-    foodsDiv.hide().append(foodItem).slideDown('slow');
+    var foodItem = '<li>Name: '+value.name+', Yumminess: '+value.yumminess+'<button class="destroy" data-id="'+ value.id +'">Delete Me!</button></li>';
+    // console.log(foodItem);
+    addToPage(foodItem, foodsDiv)
   })
 }
 
+function addToPage(thing, element) {
+  element.hide().append(thing).slideDown('slow');
+}
+
+function destroyItem() {
+  item = $(this);
+  itemId = item.data('id');
+  console.log(itemId);
+  item.parent().remove()
+}
 
 
 });
