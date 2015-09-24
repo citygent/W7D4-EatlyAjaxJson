@@ -65,21 +65,21 @@ app.post("/foods", function (req, res) {
 })
 
 app.delete("/foods/:id", function (req, res) {
-  console.log("hitting delete route");
-  console.log(foods)
+  // console.log("hitting delete route");
+  // console.log(foods)
   // finding an object with id = req.body.id out of the foods
   for (var i = 0; i < foods.length; i++) {
     // console.log(typeof foods[i].id)
     // console.log(typeof req.params.id)
     if (foods[i].id === parseInt(req.params.id)) {
+      deleted = foods[i]
       index = foods.indexOf(foods[i])
-      foods.splice(index,1)
+      foods.splice(index,1)   // remove item from array
     }
   }
-  console.log(foods)
   // console.log(foods)
-  // remove item from array
-  // render deleted object
+  res.json(deleted)// render deleted object
+  // console.log(foods)
 })
 
 // listen on port 3000
