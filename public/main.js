@@ -2,6 +2,7 @@ $(document).ready(function() {
   console.log( "Wagwan? " );
 
   var foodsDiv = $('.foods ul');
+  var form = $('#new-food')
 
   $.get('//localhost:3000/foods', function(response){
     // console.log(response);
@@ -9,6 +10,11 @@ $(document).ready(function() {
   })
 
   $('.foods ul').on('click', '.destroy', destroyItem);
+
+  form.on('submit', function(event) {
+    event.preventDefault();
+    createItem();
+  })
 
 function render(response) {
   var data = response;
@@ -38,5 +44,16 @@ function destroyItem() {
         })
 }
 
+function createItem(){
+  console.log(form.serialize())
 
+  $.ajax({
+    url: '/foods',
+    type: 'post',
+    data: form.serialize(),
+    success: function(response) {
+        console.log(response);
+            }
+        })
+}
 });
