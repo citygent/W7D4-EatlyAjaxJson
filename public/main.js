@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 function render(response) {
   var data = response;
-  // console.log(data);
+  console.log(data);
   $.each(data, function(index, value) {
     // console.log(value.name);
     var foodItem = '<li>Name: '+value.name+', Yumminess: '+value.yumminess+'<button class="destroy" data-id="'+ value.id +'">Delete Me!</button></li>';
@@ -52,7 +52,7 @@ function createItem(){
     type: 'post',
     data: form.serialize(),
     success: function(response) {
-        console.log(response);
+        render([response]);
             }
         })
 }
